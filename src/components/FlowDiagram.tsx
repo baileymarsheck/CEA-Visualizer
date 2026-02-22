@@ -17,6 +17,7 @@ import { GraphTitleNode } from './nodes/GraphTitleNode';
 import { NarrativeSummaryNode } from './nodes/NarrativeSummaryNode';
 import { ArcEdge } from './edges/ArcEdge';
 import { useCEAGraph } from '../hooks/useCEAGraph';
+import type { CEAModel } from '../types/cea';
 import { NodeTooltip } from './NodeTooltip';
 import { SpreadsheetPanel } from './panels/SpreadsheetPanel';
 import { CountrySelector } from './panels/CountrySelector';
@@ -48,11 +49,11 @@ interface TooltipRect {
 }
 
 interface FlowDiagramProps {
-  modelId: string;
+  model: CEAModel;
   onBack?: () => void;
 }
 
-export function FlowDiagram({ modelId, onBack }: FlowDiagramProps) {
+export function FlowDiagram({ model: modelProp, onBack }: FlowDiagramProps) {
   const {
     model,
     nodes,
@@ -70,7 +71,7 @@ export function FlowDiagram({ modelId, onBack }: FlowDiagramProps) {
     handleInputChange,
     overrides,
     setOverrides,
-  } = useCEAGraph(modelId);
+  } = useCEAGraph(modelProp);
 
   const [tooltipRect, setTooltipRect] = useState<TooltipRect | null>(null);
   const [tooltipNodeId, setTooltipNodeId] = useState<string | null>(null);

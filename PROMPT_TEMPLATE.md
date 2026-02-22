@@ -1,13 +1,13 @@
 # CEA Visualizer — Spreadsheet Conversion Prompt
 
-Use this file with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effectiveness analysis spreadsheet into a model file for CEA Visualizer.
+Use this file with any AI chatbot (Claude, ChatGPT, Gemini, etc.) to convert a cost-effectiveness analysis spreadsheet into a model file for CEA Visualizer.
 
 ---
 
 ## How to use
 
 1. Download this file (`PROMPT_TEMPLATE.md`) — there is a download link on [CEA Visualizer](https://cea-visualizer.vercel.app)
-2. Start a new chat with Claude or ChatGPT
+2. Start a new chat with a chatbot
 3. Attach **this file** and your **spreadsheet file** (Excel or CSV) as file attachments
 4. Send a message like: "Follow the instructions in PROMPT_TEMPLATE.md to convert my spreadsheet"
 5. The AI will return a JSON file — save it as `my-model.json`

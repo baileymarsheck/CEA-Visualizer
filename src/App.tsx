@@ -1,15 +1,25 @@
 import { useState } from 'react';
+import type { CEAModel } from './types/cea';
+import { getModel } from './data/models';
 import { FlowDiagram } from './components/FlowDiagram';
 import { LandingPage } from './components/LandingPage';
 
-function App() {
-  const [activeCEA, setActiveCEA] = useState<string | null>(null);
+type ActiveView = { kind: 'static'; id: string } | { kind: 'dynamic'; model: CEAModel };
 
-  if (activeCEA) {
-    return <FlowDiagram modelId={activeCEA} onBack={() => setActiveCEA(null)} />;
+function App() {
+  const [activeView, setActiveView] = useState<ActiveView | null>(null);
+
+  if (activeView) {
+    const model = activeView.kind === 'static' ? getModel(activeView.id) : activeView.model;
+    return <FlowDiagram model={model} onBack={() => setActiveView(null)} />;
   }
 
-  return <LandingPage onExploreCEA={(id) => setActiveCEA(id)} />;
+  return (
+    <LandingPage
+      onExploreCEA={(id) => setActiveView({ kind: 'static', id })}
+      onLoadDynamicModel={(model) => setActiveView({ kind: 'dynamic', model })}
+    />
+  );
 }
 
 export default App;

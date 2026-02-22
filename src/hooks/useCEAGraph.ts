@@ -1,11 +1,10 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { type Node, type Edge } from '@xyflow/react';
-import { getModel } from '../data/models';
 import { recalculate } from '../engine/calculate';
 import { getLayoutedElements } from '../layout/dagreLayout';
+import type { CEAModel } from '../types/cea';
 
-export function useCEAGraph(modelId: string) {
-  const model = getModel(modelId);
+export function useCEAGraph(model: CEAModel) {
   const ceaNodes = model.nodes;
 
   const [countryId, setCountryId] = useState(model.regions[0].id);
@@ -19,7 +18,7 @@ export function useCEAGraph(modelId: string) {
     setOverrides({});
     setSelectedNodeId(null);
     setHoveredNodeId(null);
-  }, [modelId, model.regions]);
+  }, [model.id, model.regions]);
 
   const country = model.regions.find((c) => c.id === countryId) ?? model.regions[0];
 
