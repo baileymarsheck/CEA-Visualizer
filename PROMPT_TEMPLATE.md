@@ -6,12 +6,12 @@ Use this file with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effe
 
 ## How to use
 
-1. Start a new chat with Claude or ChatGPT
-2. Copy everything below the second `---` line and paste it into the chat
-3. Attach your **spreadsheet file** (Excel or CSV) as a file attachment
-4. Send the message
+1. Download this file (`PROMPT_TEMPLATE.md`) — there is a download link on [CEA Visualizer](https://cea-visualizer.vercel.app)
+2. Start a new chat with Claude or ChatGPT
+3. Attach **this file** and your **spreadsheet file** (Excel or CSV) as file attachments
+4. Send a message like: "Follow the instructions in PROMPT_TEMPLATE.md to convert my spreadsheet"
 5. The AI will return a JSON file — save it as `my-model.json`
-6. Go to [CEA Visualizer](https://cea-visualizer.vercel.app), drop the file into the upload zone, and your model opens instantly — it is never saved or stored anywhere
+6. Go to [CEA Visualizer](https://cea-visualizer.vercel.app), drop the JSON into the upload zone, and your model opens instantly — it is never saved or stored anywhere
 
 ---
 
@@ -19,7 +19,7 @@ Use this file with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effe
 
 You are helping convert a cost-effectiveness analysis (CEA) spreadsheet into a structured model file for CEA Visualizer (https://cea-visualizer.vercel.app).
 
-A spreadsheet file has been attached. **Before producing any output, read all sheets/tabs in the spreadsheet.** If the spreadsheet contains multiple tabs (e.g. a "Simple CEA", a "Main CEA", a "Summary", helper tabs, etc.), briefly describe what each tab contains and ask which one should be modeled — unless one tab is clearly the primary cost-effectiveness calculation, in which case proceed with that one and note your choice.
+A spreadsheet file has been attached along with these instructions. **Before producing any output, read all sheets/tabs in the spreadsheet.** If the spreadsheet contains multiple tabs (e.g. a "Simple CEA", a "Main CEA", a "Summary", helper tabs, etc.), briefly describe what each tab contains and ask which one should be modeled — unless one tab is clearly the primary cost-effectiveness calculation, in which case proceed with that one and note your choice.
 
 Your job is to produce a single JSON file that matches the schema described here.
 
