@@ -42,10 +42,12 @@ export function SensitivityPanel({
   const selectedNode = nodeMap.get(selectedNodeId);
   if (!selectedNode) return null;
 
-  // Get the direct input dependencies (upstream)
-  const inputDeps = selectedNode.dependencies
+  // Split dependencies into adjustable (input/adjustment) and calculated (derived)
+  const allDeps = selectedNode.dependencies
     .map((id) => nodeMap.get(id))
     .filter((n): n is CEANode => n !== undefined);
+  const adjustableDeps = allDeps.filter((n) => n.nodeKind === 'input' || n.nodeKind === 'adjustment');
+  const calculatedDeps = allDeps.filter((n) => n.nodeKind === 'derived' || n.nodeKind === 'output');
 
   const selectedValue = computedValues[selectedNodeId] ?? 0;
 
@@ -74,13 +76,13 @@ export function SensitivityPanel({
 
       {/* Input sliders */}
       <div className="px-4 py-3 max-h-[50vh] overflow-y-auto">
-        {inputDeps.length === 0 ? (
+        {allDeps.length === 0 ? (
           <div className="text-xs text-gray-400 italic">
             This node has no upstream dependencies to adjust.
           </div>
         ) : (
           <div className="space-y-4">
-            {inputDeps.map((dep) => (
+            {adjustableDeps.map((dep) => (
               <SensitivitySlider
                 key={dep.id}
                 node={dep}
@@ -90,6 +92,37 @@ export function SensitivityPanel({
                 onValueChange={(val) => onInputChange(dep.id, val)}
               />
             ))}
+            {calculatedDeps.length > 0 && (
+              <div className="space-y-2">
+                {adjustableDeps.length > 0 && (
+                  <div className="border-t border-gray-100 pt-3">
+                    <div className="text-[9px] uppercase tracking-wider text-gray-400 font-semibold mb-2">
+                      Calculated inputs
+                    </div>
+                  </div>
+                )}
+                {calculatedDeps.map((dep) => {
+                  const val = computedValues[dep.id] ?? 0;
+                  const isPercentLike = dep.nodeKind === 'adjustment' || dep.format === 'percentage';
+                  const displayVal = isPercentLike
+                    ? formatSignedPercentage(val)
+                    : formatValue(val, dep.format);
+                  return (
+                    <div key={dep.id} className="flex items-center justify-between opacity-60">
+                      <div className="text-[11px] text-gray-500 leading-tight flex-1 pr-2">
+                        {dep.label}
+                      </div>
+                      <div className="text-xs font-mono text-gray-500 flex-shrink-0">
+                        {displayVal}
+                      </div>
+                    </div>
+                  );
+                })}
+                <div className="text-[9px] text-gray-400 italic pt-1">
+                  Calculated values update automatically — adjust their upstream inputs to change them.
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
