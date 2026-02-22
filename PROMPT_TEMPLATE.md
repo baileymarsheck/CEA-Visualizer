@@ -1,23 +1,26 @@
 # CEA Visualizer — Spreadsheet Conversion Prompt
 
-Use this prompt with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effectiveness analysis spreadsheet into a model file for CEA Visualizer.
+Use this file with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effectiveness analysis spreadsheet into a model file for CEA Visualizer.
 
 ---
 
 ## How to use
 
-1. Copy everything below the horizontal line
-2. Paste it into a new chat with Claude or ChatGPT
-3. Paste your spreadsheet content at the bottom where indicated
-4. The AI will return a TypeScript file
-5. Save that file as `src/data/models/your-model-name.ts` in the CEA Visualizer repo
-6. Add it to `src/data/models/index.ts` and `src/components/LandingPage.tsx`
+1. Start a new chat with Claude or ChatGPT
+2. Attach **this file** (`PROMPT_TEMPLATE.md`) as a file attachment
+3. Attach your **spreadsheet file** (Excel or CSV) as a file attachment
+4. Send a message like: "Please follow the instructions in PROMPT_TEMPLATE.md to convert the attached spreadsheet."
+5. The AI will return a TypeScript file
+6. Save that file as `src/data/models/your-model-name.ts` in the CEA Visualizer repo
+7. Add it to `src/data/models/index.ts` and `src/components/LandingPage.tsx`
 
 ---
 
 ---
 
 You are helping convert a cost-effectiveness analysis (CEA) spreadsheet into a structured model file for CEA Visualizer (https://cea-visualizer.vercel.app).
+
+The spreadsheet has been attached as a file. Use the data from that file to populate the model.
 
 I will paste the contents of my spreadsheet below. Your job is to produce a TypeScript model file that matches the schema described here.
 
@@ -177,8 +180,6 @@ Group additive adjustments (e.g. two types of benefit) inside one `(1 + a + b)` 
 
 ---
 
-## MY SPREADSHEET
+---
 
-[PASTE YOUR SPREADSHEET CONTENT HERE]
-
-You can copy-paste rows directly from Excel or Google Sheets. Include column headers if present. If the spreadsheet has multiple tabs, indicate which tab each section comes from.
+*The spreadsheet file is attached. Use it as the source data for all node values, regions, and formulas.*
