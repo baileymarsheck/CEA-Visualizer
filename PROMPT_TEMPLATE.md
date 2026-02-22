@@ -21,11 +21,11 @@ You are helping convert a cost-effectiveness analysis (CEA) spreadsheet into a s
 
 A spreadsheet file has been attached along with these instructions. **Before producing any output, read all sheets/tabs in the spreadsheet.** If the spreadsheet contains multiple tabs (e.g. a "Simple CEA", a "Main CEA", a "Summary", helper tabs, etc.), briefly describe what each tab contains and ask which one should be modeled — unless one tab is clearly the primary cost-effectiveness calculation, in which case proceed with that one and note your choice.
 
-Your job is to produce a single JSON file that matches the schema described here.
+Your job is to produce a single JSON file that matches the schema described here. **When you are done, save or offer the result as a downloadable file named `my-model.json`.** Do not just paste it inline — the user needs to download it and upload it to the site.
 
 ## OUTPUT FORMAT
 
-Produce a single JSON file with this structure:
+Produce a single JSON file named `my-model.json` with this structure:
 
 ```json
 {
