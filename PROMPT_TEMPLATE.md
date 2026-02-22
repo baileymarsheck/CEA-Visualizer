@@ -20,9 +20,9 @@ Use this file with any AI chatbot (Claude, ChatGPT, etc.) to convert a cost-effe
 
 You are helping convert a cost-effectiveness analysis (CEA) spreadsheet into a structured model file for CEA Visualizer (https://cea-visualizer.vercel.app).
 
-The spreadsheet has been attached as a file. Use the data from that file to populate the model.
+The spreadsheet has been attached as a file. **Before producing any output, read all sheets/tabs in the spreadsheet.** If the spreadsheet contains multiple tabs (e.g. a "Simple CEA", a "Main CEA", a "Summary", helper tabs, etc.), briefly describe what each tab contains and ask which one should be modeled — unless one tab is clearly the primary cost-effectiveness calculation, in which case proceed with that one and note your choice.
 
-I will paste the contents of my spreadsheet below. Your job is to produce a TypeScript model file that matches the schema described here.
+Your job is to produce a TypeScript model file that matches the schema described here.
 
 ## OUTPUT FORMAT
 
