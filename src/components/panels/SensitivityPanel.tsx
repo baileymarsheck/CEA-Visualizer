@@ -108,7 +108,7 @@ export function SensitivityPanel({
                     ? formatSignedPercentage(val)
                     : formatValue(val, dep.format);
                   return (
-                    <div key={dep.id} className="flex items-center justify-between opacity-60">
+                    <div key={dep.id} className="flex items-center justify-between">
                       <div className="text-[11px] text-gray-500 leading-tight flex-1 pr-2">
                         {dep.label}
                       </div>
