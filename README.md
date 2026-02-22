@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# CEA Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive tool for exploring GiveWell's cost-effectiveness analyses (CEAs). Turns dense spreadsheet models into navigable flow diagrams where you can trace every assumption, understand how values are derived, and run live sensitivity analyses.
 
-Currently, two official plugins are available:
+**Live site:** https://cea-visualizer.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## What it does
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+GiveWell publishes detailed cost-effectiveness spreadsheets for their top charities, but these are hard to read and harder to intuit. CEA Visualizer renders each model as a directed graph — nodes represent inputs, intermediate calculations, adjustments, and final outputs, connected by edges that show the flow of calculations.
 
-## Expanding the ESLint configuration
+**Features:**
+- **Flow diagram** — pan and zoom through the full causal graph, with nodes color-coded by type (inputs, calculations, adjustments, outputs)
+- **Spreadsheet panel** — mirrors the original CEA structure section by section, with live computed values
+- **Sensitivity analysis** — click any node, then drag sliders or type values to see how changes ripple through the entire model in real time
+- **Region switching** — compare the same model across countries or regions using GiveWell's published baseline values
+- **Tooltips** — hover any node for its description, formula, and current value
+- **Focus mode** — click a node to highlight it and its direct dependencies, dimming everything else
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Models included
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Model | Org | Regions | Nodes |
+|---|---|---|---|
+| ITN Distribution | Against Malaria Foundation | 8 countries | 21 |
+| Conditional Cash Transfers for Vaccination | New Incentives | 7 Nigerian states | 23 |
+| Malnutrition Treatment (SAM) | Taimaka | 1 region | 20 |
+| Seasonal Malaria Chemoprevention | Malaria Consortium | 2 countries | 22 |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+All models are based on GiveWell's publicly available 2024–2025 cost-effectiveness spreadsheets.
+
+---
+
+## Tech stack
+
+- **React 19** + **TypeScript**
+- **Vite** for bundling
+- **@xyflow/react** (React Flow) for the interactive graph
+- **Dagre** for automatic graph layout
+- **Tailwind CSS** for styling
+- Deployed on **Vercel**
+
+---
+
+## Running locally
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Data sourcing
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+All values are sourced directly from [GiveWell's published cost-effectiveness models](https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-effectiveness-models). This project is not affiliated with GiveWell.
+
+---
+
+Built by [Bailey Marsheck](https://www.linkedin.com/in/baileymarsheck/) using Claude Code.
