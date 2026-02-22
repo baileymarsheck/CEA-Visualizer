@@ -6,9 +6,9 @@ Use this file with any AI chatbot (Claude, ChatGPT, Gemini, etc.) to convert a c
 
 ## How to use
 
-1. Download this file (`PROMPT_TEMPLATE.md`) — there is a download link on [CEA Visualizer](https://cea-visualizer.vercel.app)
-2. Start a new chat with a chatbot
-3. Attach **this file** and your **spreadsheet file** (Excel or CSV) as file attachments
+1. Start a new chat with a chatbot 
+2. Paste in this file (`PROMPT_TEMPLATE.md`) — there is a download link on [CEA Visualizer](https://cea-visualizer.vercel.app)
+3. Attach your **spreadsheet file** (Excel or CSV) as file attachments
 4. Send a message like: "Follow the instructions in PROMPT_TEMPLATE.md to convert my spreadsheet"
 5. The AI will return a JSON file — save it as `my-model.json`
 6. Go to [CEA Visualizer](https://cea-visualizer.vercel.app), drop the JSON into the upload zone, and your model opens instantly — it is never saved or stored anywhere
