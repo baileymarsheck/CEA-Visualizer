@@ -1,0 +1,417 @@
+import { useCallback, useRef, useState } from 'react';
+
+interface LandingPageProps {
+  onExploreCEA: (ceaId: string) => void;
+}
+
+const primaryCEAs = [
+  {
+    id: 'amf-itn',
+    title: 'Against Malaria Foundation — ITN Distribution',
+    description:
+      'Insecticide-treated net distributions across 8 countries. GiveWell\'s flagship cost-effectiveness analysis with ~21 calculation nodes covering mortality benefits, adjustment factors, and final cost per life saved.',
+    regions: '8 countries',
+    nodes: 21,
+    tag: 'GiveWell Top Charity',
+  },
+  {
+    id: 'new-incentives',
+    title: 'New Incentives — Conditional Cash Transfers for Vaccination',
+    description:
+      'Cash transfers to increase infant vaccination across 7 Nigerian states. Covers mortality reduction across 4 age groups, income increases, consumption benefits, and adjustment factors.',
+    regions: '7 states',
+    nodes: 23,
+    tag: 'GiveWell Top Charity',
+  },
+  {
+    id: 'taimaka',
+    title: 'Taimaka — Malnutrition Treatment',
+    description:
+      'Severe acute malnutrition (SAM) treatment in Gombe State, Nigeria. Covers untreated mortality rates, plausibility discounts, treatment effectiveness vs no care and vs government treatment, income effects, and supplemental adjustments.',
+    regions: '1 region',
+    nodes: 20,
+    tag: 'GiveWell Incubation Grant',
+  },
+];
+
+const moreCEAs = [
+  {
+    id: 'smc',
+    title: 'Malaria Consortium — Seasonal Malaria Chemoprevention',
+    description:
+      'SMC drug distribution to children under 5 during malaria transmission season in Burkina Faso and Chad. Covers coverage, under-5 mortality, over-5 spillover, developmental benefits, and leverage & funging adjustments.',
+    regions: '2 countries',
+    nodes: 22,
+    tag: 'GiveWell Top Charity',
+  },
+];
+
+export function LandingPage({ onExploreCEA }: LandingPageProps) {
+  const [sheetUrl, setSheetUrl] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragOver, setDragOver] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  const handleFileDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    // Placeholder — file parsing not yet implemented
+  }, []);
+
+  const handleFileSelect = useCallback(() => {
+    // Placeholder — file parsing not yet implemented
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+      {/* Header */}
+      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">CEA Visualizer</h1>
+              <p className="text-xs text-gray-500">Interactive Cost-Effectiveness Analysis</p>
+            </div>
+          </div>
+          <a
+            href="https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-effectiveness-models"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            About CEAs (GiveWell)
+          </a>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <div className="max-w-5xl mx-auto px-6 pt-16 pb-12">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 leading-tight">
+            Turn spreadsheet CEAs into
+            <span className="text-blue-600"> interactive diagrams</span>
+          </h2>
+          <p className="mt-4 text-gray-500 text-base leading-relaxed">
+            CEAs are powerful but can be hard to understand in spreadsheet format.
+            Upload your model or explore existing ones to see how every assumption connects and
+            flows through the calculation.
+          </p>
+        </div>
+      </div>
+
+      {/* Two options */}
+      <div className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Option 1: Explore existing (left) */}
+          <div className="rounded-xl border border-gray-200 bg-white p-6 hover:border-blue-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
+              <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-2">Explore existing CEAs</h3>
+            <p className="text-xs text-gray-500 leading-relaxed mb-4">
+              Dive into pre-built interactive models from GiveWell's published analyses.
+            </p>
+
+            {/* CEA cards */}
+            <div className="space-y-2">
+              {primaryCEAs.map((cea) => (
+                <button
+                  key={cea.id}
+                  onClick={() => onExploreCEA(cea.id)}
+                  className="w-full text-left rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50/50 p-3 transition-all group"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                        {cea.title}
+                      </div>
+                      <div className="text-[10px] text-gray-400 mt-0.5 leading-relaxed line-clamp-2">
+                        {cea.description}
+                      </div>
+                    </div>
+                    <svg className="w-4 h-4 text-gray-300 group-hover:text-blue-500 flex-shrink-0 mt-0.5 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="text-[9px] font-medium text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                      {cea.tag}
+                    </span>
+                    <span className="text-[9px] text-gray-400">
+                      {cea.regions} &middot; {cea.nodes} nodes
+                    </span>
+                  </div>
+                </button>
+              ))}
+
+              {/* More CEAs toggle */}
+              <button
+                onClick={() => setShowMore((v) => !v)}
+                className="w-full text-left rounded-lg border border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-50/50 px-3 py-2 transition-all flex items-center justify-between group"
+              >
+                <span className="text-[11px] font-medium text-gray-400 group-hover:text-gray-600 transition-colors">
+                  More CEAs
+                </span>
+                <svg
+                  className={`w-3.5 h-3.5 text-gray-300 group-hover:text-gray-500 transition-all ${showMore ? 'rotate-90' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Expanded more CEAs */}
+              {showMore && (
+                <div className="space-y-2 pl-2 border-l-2 border-gray-100">
+                  {moreCEAs.map((cea) => (
+                    <button
+                      key={cea.id}
+                      onClick={() => onExploreCEA(cea.id)}
+                      className="w-full text-left rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50/50 p-3 transition-all group"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                            {cea.title}
+                          </div>
+                          <div className="text-[10px] text-gray-400 mt-0.5 leading-relaxed line-clamp-2">
+                            {cea.description}
+                          </div>
+                        </div>
+                        <svg className="w-4 h-4 text-gray-300 group-hover:text-blue-500 flex-shrink-0 mt-0.5 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                      <div className="flex items-center gap-3 mt-2">
+                        <span className="text-[9px] font-medium text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                          {cea.tag}
+                        </span>
+                        <span className="text-[9px] text-gray-400">
+                          {cea.regions} &middot; {cea.nodes} nodes
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Option 2: Analyze your own (right) — upload + Google Sheets combined */}
+          <div className="rounded-xl border border-gray-200 bg-white p-6 hover:border-blue-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center mb-4">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-1">Analyze your own spreadsheet</h3>
+            <p className="text-xs text-gray-500 leading-relaxed mb-4">
+              Upload a file or paste a Google Sheet link to visualize your own cost-effectiveness model.
+            </p>
+
+            {/* Upload area */}
+            <div
+              className={`rounded-lg border-2 border-dashed p-4 mb-4 transition-all cursor-pointer ${
+                dragOver
+                  ? 'border-blue-500 bg-blue-50'
+                  : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50/30'
+              }`}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleFileDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".xlsx,.xls,.csv"
+                className="hidden"
+                onChange={handleFileSelect}
+              />
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-gray-700">
+                    Drop an Excel or CSV file here, or click to browse
+                  </div>
+                  <div className="text-[10px] text-gray-400 mt-0.5">.xlsx, .xls, .csv</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex-1 border-t border-gray-200" />
+              <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium">or</span>
+              <div className="flex-1 border-t border-gray-200" />
+            </div>
+
+            {/* Google Sheets link */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                <span className="text-xs font-medium text-gray-700">Paste a Google Sheet link</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={sheetUrl}
+                  onChange={(e) => setSheetUrl(e.target.value)}
+                  placeholder="https://docs.google.com/spreadsheets/d/..."
+                  className="flex-1 text-xs border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100 placeholder:text-gray-300"
+                />
+                <button
+                  disabled={!sheetUrl}
+                  className="text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  Import
+                </button>
+              </div>
+            </div>
+
+            <p className="text-[10px] text-gray-400 mt-4 italic">Coming soon</p>
+          </div>
+        </div>
+      </div>
+
+      {/* How to Use */}
+      <div className="bg-white border-t border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 py-16">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold text-blue-600">Using CEA Visualizer</h3>
+            <p className="mt-2 text-sm text-gray-500 max-w-lg mx-auto">
+              Get the most out of the interactive diagram in a few simple steps.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+                1
+              </div>
+              <h4 className="text-sm font-semibold text-gray-900 mb-2">Explore the graph</h4>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Hover over any node or spreadsheet row to see its description, formula, and value.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+                2
+              </div>
+              <h4 className="text-sm font-semibold text-gray-900 mb-2">Click to focus</h4>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Click any node to isolate it and its direct dependencies while dimming everything else.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+                3
+              </div>
+              <h4 className="text-sm font-semibold text-gray-900 mb-2">Run sensitivity analysis</h4>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Drag sliders or edit values to see how changing any input ripples through the entire model in real time.
+              </p>
+            </div>
+          </div>
+
+          {/* Additional tips */}
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex gap-3 items-start">
+              <div className="w-7 h-7 rounded-md bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-gray-800">Switch countries</h5>
+                <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                  Use the country selector in the top-right to compare the same model across different
+                  geographies. Each country has its own baseline values from GiveWell's spreadsheet.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 items-start">
+              <div className="w-7 h-7 rounded-md bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-gray-800">Reset anytime</h5>
+                <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                  Changed too many values? Hit "Reset to defaults" in the header to restore the original
+                  country data. Switching countries also resets all overrides automatically.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 items-start">
+              <div className="w-7 h-7 rounded-md bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-gray-800">Resize panels</h5>
+                <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                  Drag the divider between the spreadsheet and diagram to give more room to whichever
+                  view you prefer. The spreadsheet mirrors the original CEA structure section by section.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 items-start">
+              <div className="w-7 h-7 rounded-md bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h5 className="text-xs font-semibold text-gray-800">Understand the color coding</h5>
+                <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                  Green nodes are inputs (base data), blue nodes are calculations (derived values),
+                  orange nodes are adjustment factors, and purple nodes are final results.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-white/50">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+          <p className="text-[10px] text-gray-400">
+            Data sourced from GiveWell's published cost-effectiveness models. Not affiliated with GiveWell.
+          </p>
+          <p className="text-[10px] text-gray-400">
+            Built by <a href="https://www.linkedin.com/in/baileymarsheck/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600 transition-colors">Bailey Marsheck</a> using Claude Code &middot; Open source
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
