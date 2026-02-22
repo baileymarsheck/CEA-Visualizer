@@ -7,7 +7,7 @@ Use this file with any AI chatbot (Claude, ChatGPT, Gemini, etc.) to convert a c
 ## How to use
 
 1. Start a new chat with a chatbot 
-2. Paste in this file (`PROMPT_TEMPLATE.md`) — there is a download link on [CEA Visualizer](https://cea-visualizer.vercel.app)
+2. Paste in this file (`PROMPT_TEMPLATE.md`) — download it here: [PROMPT_TEMPLATE.md](https://raw.githubusercontent.com/baileymarsheck/CEA-Visualizer/main/PROMPT_TEMPLATE.md)
 3. Attach your **spreadsheet file** (Excel or CSV) as file attachments
 4. Send a message like: "Follow these instructions to convert my attached spreadsheet"
 5. The AI will return a JSON file — save it as `my-model.json`
