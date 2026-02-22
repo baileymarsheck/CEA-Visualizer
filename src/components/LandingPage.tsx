@@ -118,7 +118,7 @@ export function LandingPage({ onExploreCEA, onLoadDynamicModel }: LandingPagePro
             <span className="text-blue-600"> interactive diagrams</span>
           </h2>
           <p className="mt-4 text-gray-500 text-base leading-relaxed">
-            CEAs are powerful but can be hard to understand in spreadsheet format.
+            Cost-effectiveness analyses (CEAs) can be challenging to explore in spreadsheet format.
             Upload your model or explore existing ones to see how every assumption connects and
             flows through the calculation.
           </p>
