@@ -1,14 +1,16 @@
 # CEA Visualizer
 
-An interactive tool for exploring GiveWell's cost-effectiveness analyses (CEAs). Turns dense spreadsheet models into navigable flow diagrams where you can trace every assumption, understand how values are derived, and run live sensitivity analyses.
+An interactive tool for exploring GiveWell's cost-effectiveness analyses (CEAs). Renders each model as a navigable flow diagram where you can trace every assumption, understand how values are derived, and run live sensitivity analyses.
 
 **Live site:** https://cea-visualizer.vercel.app
+
+Built by [Bailey Marsheck](https://www.linkedin.com/in/baileymarsheck/) using [Claude Code](https://claude.ai/claude-code).
 
 ---
 
 ## What it does
 
-GiveWell publishes detailed cost-effectiveness spreadsheets for their top charities, but these are hard to read and harder to intuit. CEA Visualizer renders each model as a directed graph — nodes represent inputs, intermediate calculations, adjustments, and final outputs, connected by edges that show the flow of calculations.
+GiveWell publishes detailed cost-effectiveness spreadsheets for their top charities. CEA Visualizer renders each model as a directed graph — nodes represent inputs, intermediate calculations, adjustments, and final outputs, connected by edges that show the flow of calculations.
 
 **Features:**
 - **Flow diagram** — pan and zoom through the full causal graph, with nodes color-coded by type (inputs, calculations, adjustments, outputs)
@@ -59,4 +61,4 @@ All values are sourced directly from [GiveWell's published cost-effectiveness mo
 
 ---
 
-Built by [Bailey Marsheck](https://www.linkedin.com/in/baileymarsheck/) using Claude Code.
+Built by [Bailey Marsheck](https://www.linkedin.com/in/baileymarsheck/) using [Claude Code](https://claude.ai/claude-code).
